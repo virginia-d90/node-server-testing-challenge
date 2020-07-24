@@ -17,10 +17,11 @@ function findById(id){
         .first()
 }
 
-function insert(user){
+async function insert(user){
+    const [id] = await db('users').insert(user, 'id')
     return db('users')
-        .insert(user)
-        .where({id:user.id})
+        .where({id})
+        .first()
 }
 
 function remove(id){
